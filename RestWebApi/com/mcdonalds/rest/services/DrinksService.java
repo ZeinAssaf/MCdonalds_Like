@@ -18,4 +18,7 @@ public class DrinksService {
 	public List<Drink> getDrinks() {
 		return drinksList;
 	}
+	public Drink getDrinksById(int id) {
+		return drinksList.get(id);
+	}
 }

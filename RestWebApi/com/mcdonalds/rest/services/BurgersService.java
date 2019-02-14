@@ -18,4 +18,7 @@ public class BurgersService {
 	public List<Burger> getBurgers() {
 		return burgersList;
 	}
+	public Burger getBurgerById(int id) {
+		return burgersList.get(id);
+	}
 }

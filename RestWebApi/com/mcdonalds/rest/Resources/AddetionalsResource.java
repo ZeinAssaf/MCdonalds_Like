@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -28,8 +29,10 @@ public class AddetionalsResource {
 		}
 		return addetionalsList;
 	}
-
-	public Addetional getAddetionalById(int id,@Context UriInfo uriInfo) {
+	
+	@GET
+	@Path("/{id}")
+	public Addetional getAddetionalById(@PathParam("id")int id,@Context UriInfo uriInfo) {
 		
 		Addetional addetional=addetionalServie.getAddetionlsById(id);
 		String url=linksMaker.getLinkForSelf(id, uriInfo,addetional);
