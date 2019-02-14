@@ -1,35 +1,18 @@
 package com.mcdonalds.rest.entities;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Addetional {
-	private int id;
-	private String name;
+public class Addetional extends AbstactFoodEntity implements Serializable{
+	private static final long serialVersionUID = -6064784564211764989L;
 
 	public Addetional() {
+		super();
 	}
 
 	public Addetional(int id, String name) {
-		super();
-		this.id = id;
-		this.name = name;
+		super(id, name);
 	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 }

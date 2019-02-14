@@ -1,5 +1,6 @@
 package com.mcdonalds.rest.Resources;
 import com.mcdonalds.rest.entities.Menu;
+import com.mcdonalds.rest.hatous.LinksMaker;
 import com.mcdonalds.rest.services.MenuService;
 
 import java.util.List;
@@ -19,31 +20,24 @@ public class MenuResource {
 	
 	
 	private MenuService foodservice = new MenuService();
+	private LinksMaker linksMaker= new LinksMaker();
 
 	@GET
 	public List<Menu> getMenu(@Context UriInfo uriInfo) {
 		List<Menu>menuList=foodservice.getmenues();
 		for (Menu menu : menuList) {
-			String link =getLinkForSelf(menu.getId(), uriInfo);
-			menu.addLink(link,"self");
+			String url =linksMaker.getLinkForSelf(menu.getId(), uriInfo,menu);
+			linksMaker.addLink(url,"self",menu);
 		}
 		return menuList;
 	}
 	@GET
 	@Path("/{id}")
 	public Menu getMenuById(@PathParam("id") int id,@Context UriInfo uriInfo) {
-		String asd = getLinkForSelf(id, uriInfo);
 		Menu menu= foodservice.getMenuById(id);
-		
-		menu.addLink(asd,"self");
+		String url = linksMaker.getLinkForSelf(id, uriInfo,menu);
+		linksMaker.addLink(url,"self",menu);
 		return menu;
 	}
-	private String getLinkForSelf(int id, UriInfo uriInfo) {
-		String url=uriInfo.getBaseUriBuilder()
-				.path(MenuResource.class)
-				.path(Integer.toString(id))
-				.build()
-				.toString();
-		return url;
-	}
+
 }

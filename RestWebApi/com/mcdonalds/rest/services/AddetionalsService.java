@@ -18,5 +18,8 @@ public class AddetionalsService {
 	public List<Addetional> getAddetionls() {
 		return addetioalsList;
 	}
+	public Addetional getAddetionlsById(int id) {
+		return addetioalsList.get(id);
+	}
 
 }

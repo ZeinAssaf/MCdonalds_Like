@@ -10,6 +10,7 @@ import javax.ws.rs.ext.Provider;
 
 @Provider
 public class LoggingFilter implements ContainerRequestFilter, ContainerResponseFilter {
+	//TODO database management to be added later
 
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException {

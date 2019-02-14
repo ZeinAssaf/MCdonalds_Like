@@ -13,7 +13,8 @@ import org.glassfish.jersey.internal.util.Base64;
 @Provider
 public class SecurityFilter implements ContainerRequestFilter {
 	/**
-	 * THis is a
+	 * THis is a a basic authentication filter that looks at the username and the
+	 * password to authorize the user
 	 */
 	private static final String AUTHoRIZATION_HEADER_KEY = "Authorization";
 	private static final String AUTHoRIZATION_HEADER_PREFIX = "Basic ";
@@ -29,7 +30,9 @@ public class SecurityFilter implements ContainerRequestFilter {
 				StringTokenizer tokenizer = new StringTokenizer(decodedString, ":");
 				String username = tokenizer.nextToken();
 				String password = tokenizer.nextToken();
-
+				
+				//Test user
+				//TODO database authorization to be added later
 				if ("user".equals(username) && "password".equals(password)) {
 					return;
 				}
