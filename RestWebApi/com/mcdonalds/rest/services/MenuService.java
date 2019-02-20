@@ -1,29 +1,31 @@
 package com.mcdonalds.rest.services;
 
-import java.util.ArrayList;
 import java.util.List;
-import com.mcdonalds.rest.entities.Menu;
+import com.mcdonalds.database.MenuDao;
+import com.mcdonalds.rest.models.Menu;
 
 public class MenuService {
-	private ArrayList<Menu> menuList = new ArrayList<>();
+	public MenuDao dao = new MenuDao();
 
 	public MenuService() {
-		menuList.add(new Menu(1, "Big mac"));
-		menuList.add(new Menu(2, "Big share"));
-		menuList.add(new Menu(3, "Hot Wings"));
-		menuList.add(new Menu(4, "McVegan"));
 	}
 
 	public List<Menu> getmenues() {
-		return menuList;
+		return dao.getItems();
 	}
 
 	public Menu getMenuById(int id) {
-		for (Menu menu : menuList) {
-			if (menu.getId()==id) {
-				return menu;
-			}
-		}return null;
+		Menu menu = (Menu) dao.getItemById(id);
+		return menu;
+	}
+
+	public Menu addMenu(Menu menu) {
+		dao.saveItem(menu);
+		return menu;
+	}
+
+	public void deleteMenu(int id) {
+		dao.deleteItem(id);
 	}
 
 }

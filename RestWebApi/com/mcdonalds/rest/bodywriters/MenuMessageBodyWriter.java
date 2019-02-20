@@ -12,7 +12,7 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.MessageBodyWriter;
 import javax.ws.rs.ext.Provider;
 
-import com.mcdonalds.rest.entities.Menu;
+import com.mcdonalds.rest.models.Menu;
 
 @Provider
 @Produces(MediaType.TEXT_PLAIN)

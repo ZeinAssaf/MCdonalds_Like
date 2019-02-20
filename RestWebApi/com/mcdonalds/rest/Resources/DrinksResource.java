@@ -2,17 +2,19 @@ package com.mcdonalds.rest.Resources;
 
 import java.util.List;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-
-import com.mcdonalds.rest.entities.Addetional;
-import com.mcdonalds.rest.entities.Drink;
+import javax.ws.rs.core.Response.Status;
 import com.mcdonalds.rest.hatous.LinksMaker;
+import com.mcdonalds.rest.models.Drink;
 import com.mcdonalds.rest.services.DrinksService;
 
 @Path("/drinks")
@@ -37,6 +39,18 @@ public class DrinksResource {
 		String url=linksMaker.getLinkForSelf(id, uriInfo,drink);
 		linksMaker.addLink(url, "self",drink);
 		return drink;
+	}
+	@POST
+	public Response addDrink(Drink drink) {
+		drinkService.addDrink(drink);
+		return Response.status(Status.CREATED).build();
+	}
+
+	@DELETE
+	@Path("{id}")
+	public Response deleteMenu(int id) {
+		drinkService.deleteDrink(id);
+		return Response.status(Status.GONE).build();
 	}
 
 }

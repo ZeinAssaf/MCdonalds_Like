@@ -1,24 +1,29 @@
 package com.mcdonalds.rest.services;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import com.mcdonalds.rest.entities.Burger;
+import com.mcdonalds.database.BurgersDao;
+import com.mcdonalds.rest.models.Burger;
 
 public class BurgersService {
-	private ArrayList<Burger> burgersList = new ArrayList<>();
+	private BurgersDao burgersDao = new BurgersDao();
 
 	public BurgersService() {
-		burgersList.add(new Burger(1, "meat burger"));
-		burgersList.add(new Burger(2, "beaf burger"));
-		burgersList.add(new Burger(3, "cheese burger"));
-		burgersList.add(new Burger(4, "chicken burger"));
 	}
 
 	public List<Burger> getBurgers() {
-		return burgersList;
+		return burgersDao.getItems();
 	}
+
 	public Burger getBurgerById(int id) {
-		return burgersList.get(id);
+		return burgersDao.getItemById(id);
 	}
+
+	public void addBurger(Burger burger) {
+		burgersDao.saveItem(burger);
+	}
+
+	public void deleteBurger(int id) {
+		burgersDao.deleteItem(id);
+	}
+
 }

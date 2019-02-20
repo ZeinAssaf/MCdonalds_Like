@@ -1,24 +1,29 @@
 package com.mcdonalds.rest.services;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import com.mcdonalds.rest.entities.Drink;
+import com.mcdonalds.database.DrinksDao;
+import com.mcdonalds.rest.models.Drink;
 
 public class DrinksService {
-	private ArrayList<Drink> drinksList = new ArrayList<>();
+	private DrinksDao drinksDao = new DrinksDao();
 
 	public DrinksService() {
-		drinksList.add(new Drink(1, "Coke"));
-		drinksList.add(new Drink(2, "pepsi"));
-		drinksList.add(new Drink(3, "Smootie"));
-		drinksList.add(new Drink(4, "Tee"));
 	}
 
 	public List<Drink> getDrinks() {
-		return drinksList;
+		return drinksDao.getItems();
 	}
+
 	public Drink getDrinksById(int id) {
-		return drinksList.get(id);
+		return drinksDao.getItemById(id);
 	}
+
+	public void addDrink(Drink drink) {
+		drinksDao.saveItem(drink);
+	}
+
+	public void deleteDrink(int id) {
+		drinksDao.deleteItem(id);
+	}
+
 }

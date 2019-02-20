@@ -5,12 +5,12 @@ import com.mcdonalds.rest.Resources.AddetionalsResource;
 import com.mcdonalds.rest.Resources.BurgersResource;
 import com.mcdonalds.rest.Resources.DrinksResource;
 import com.mcdonalds.rest.Resources.MenuResource;
-import com.mcdonalds.rest.entities.AbstactFoodEntity;
-import com.mcdonalds.rest.entities.Addetional;
-import com.mcdonalds.rest.entities.Burger;
-import com.mcdonalds.rest.entities.Drink;
-import com.mcdonalds.rest.entities.Link;
-import com.mcdonalds.rest.entities.Menu;
+import com.mcdonalds.rest.interfaces.FoodEntityInterface;
+import com.mcdonalds.rest.models.Addetional;
+import com.mcdonalds.rest.models.Burger;
+import com.mcdonalds.rest.models.Drink;
+import com.mcdonalds.rest.models.Link;
+import com.mcdonalds.rest.models.Menu;
 
 public class LinksMaker {
 	public LinksMaker() {
@@ -19,16 +19,16 @@ public class LinksMaker {
 	/*
 	 * This method will make the url that will be added to the item
 	 */
-	public String getLinkForSelf(int id, UriInfo uriInfo, AbstactFoodEntity abstactFoodEntity) {
+	public String getLinkForSelf(int id, UriInfo uriInfo, FoodEntityInterface foodEntityInterface) {
 		String url = "";
-		if (abstactFoodEntity.getClass().equals(Addetional.class))
+		if (foodEntityInterface.getClass().equals(Addetional.class))
 			url = uriInfo.getBaseUriBuilder().path(AddetionalsResource.class).path(Integer.toString(id)).build()
 					.toString();
-		if (abstactFoodEntity.getClass().equals(Menu.class))
+		if (foodEntityInterface.getClass().equals(Menu.class))
 			url = uriInfo.getBaseUriBuilder().path(MenuResource.class).path(Integer.toString(id)).build().toString();
-		if (abstactFoodEntity.getClass().equals(Burger.class))
+		if (foodEntityInterface.getClass().equals(Burger.class))
 			url = uriInfo.getBaseUriBuilder().path(BurgersResource.class).path(Integer.toString(id)).build().toString();
-		if (abstactFoodEntity.getClass().equals(Drink.class))
+		if (foodEntityInterface.getClass().equals(Drink.class))
 			url = uriInfo.getBaseUriBuilder().path(DrinksResource.class).path(Integer.toString(id)).build().toString();
 		return url;
 
@@ -37,11 +37,11 @@ public class LinksMaker {
 	/*
 	 * This method will add the link to the object
 	 */
-	public void addLink(String url, String rel, AbstactFoodEntity abstactFoodEntity) {
+	public void addLink(String url, String rel, FoodEntityInterface foodEntityInterface) {
 		Link link = new Link();
 		link.setLink(url);
 		link.setRel(rel);
-		abstactFoodEntity.getLinks().add(link);
+		foodEntityInterface.getLinks().add(link);
 	}
 
 }

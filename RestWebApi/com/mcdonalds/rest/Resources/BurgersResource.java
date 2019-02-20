@@ -2,16 +2,19 @@ package com.mcdonalds.rest.Resources;
 
 import java.util.List;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-
-import com.mcdonalds.rest.entities.Burger;
+import javax.ws.rs.core.Response.Status;
 import com.mcdonalds.rest.hatous.LinksMaker;
+import com.mcdonalds.rest.models.Burger;
 import com.mcdonalds.rest.services.BurgersService;
 
 @Path("/burgers")
@@ -38,6 +41,18 @@ public class BurgersResource {
 		linksMaker.addLink(url, "self", burger);
 		return burger;
 
+	}
+	@POST
+	public Response addBurger(Burger burger) {
+		burgerService.addBurger(burger);
+		return Response.status(Status.CREATED).build();
+	}
+
+	@DELETE
+	@Path("{id}")
+	public Response deketeBurger(int id) {
+		burgerService.deleteBurger(id);
+		return Response.status(Status.GONE).build();
 	}
 
 }

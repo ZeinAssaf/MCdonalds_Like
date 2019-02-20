@@ -1,25 +1,29 @@
 package com.mcdonalds.rest.services;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import com.mcdonalds.rest.entities.Addetional;
+import com.mcdonalds.database.AddetionalsDao;
+import com.mcdonalds.rest.models.Addetional;
 
 public class AddetionalsService {
-	private ArrayList<Addetional> addetioalsList = new ArrayList<>();
+	private AddetionalsDao addetionalsDao = new AddetionalsDao();
 
 	public AddetionalsService() {
-		addetioalsList.add(new Addetional(1, "Cheese"));
-		addetioalsList.add(new Addetional(2, "Salad"));
-		addetioalsList.add(new Addetional(3, "French fies"));
-		addetioalsList.add(new Addetional(4, "ice cream"));
 	}
 
 	public List<Addetional> getAddetionls() {
-		return addetioalsList;
+		return addetionalsDao.getItems();
 	}
+
 	public Addetional getAddetionlsById(int id) {
-		return addetioalsList.get(id);
+		return addetionalsDao.getItemById(id);
+	}
+
+	public void addAddetional(Addetional addetional) {
+		addetionalsDao.saveItem(addetional);
+	}
+
+	public void deleteAddetional(int id) {
+		addetionalsDao.deleteItem(id);
 	}
 
 }
